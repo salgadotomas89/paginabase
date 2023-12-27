@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "texto.css",
+	"sources": [
+		"texto.scss"
+	],
+	"names": [],
+	"mappings": "AAAA,AAAA,iBAAiB,CAAC;EACjB,OAAO,EAAE,CAAC;EACV,SAAS,EAAE,gBAAgB;EAC3B,UAAU,EAAE,gDAAgD,GAC1D;;AAED,AAAA,iBAAiB,AAAA,QAAQ,CAAC;EAC3B,OAAO,EAAE,CAAC;EACV,SAAS,EAAE,aAAa,GACtB"
+}

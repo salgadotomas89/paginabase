@@ -1,0 +1,10 @@
+.scroll-animation {
+  opacity: 0;
+  transform: translateY(70px);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out; }
+
+.scroll-animation.animate {
+  opacity: 1;
+  transform: translateY(0); }
+
+/*# sourceMappingURL=texto.css.map */

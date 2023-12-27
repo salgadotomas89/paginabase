@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "comunicados.css",
+	"sources": [
+		"comunicados.scss"
+	],
+	"names": [],
+	"mappings": "AAGA,AAAA,cAAc,CAAA;EACb,gBAAgB,EAJP,wBAAwB;EAKjC,UAAU,EAAE,0BAA0B,GACtC"
+}

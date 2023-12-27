@@ -1,0 +1,640 @@
+{% extends "configuracion.html" %}
+{% load static %}
+{% block body %}
+{% load sass_tags %}
+
+
+    <!-- Header for the course configuration section -->
+    <h2 class="display-5 mb-3 fw-semibold lh-sm" id="encabezadoCursos">Configuración cursos</h2>
+
+    <div class="p-4 mb-3 border rounded-3 bg-light">
+        <!-- Dropdown to select a course -->
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Seleccionar curso
+            </button>
+
+            
+
+            <button type="button" class="btn btn-primary" id="asignarAsignaturasBtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg> Asignar asignatura</button>
+
+
+            <!-- Dropdown menu with available courses -->
+            <ul class="dropdown-menu" style="">
+                {% if cursos %}
+                    {% for curso in cursos %}
+                        <li><button class="dropdown-item" type="button" onclick="selectCurso({{ curso.id }}, '{{ curso.nombre }}')">{{ curso.nombre }}</button></li>
+                    {% endfor %}
+                {% else %}
+                    <li><button class="dropdown-item" type="button" disabled>No hay cursos</button></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Course details section -->
+    <div id="cursoDetalle" style="display: none;">
+        <!-- Alert with course and professor details -->
+        <!-- Alert with course and professor details -->
+        <div class="alert alert-warning" role="alert">
+            <span >Profesor Jefe</span>: <span id="profesorJefeNombre"></span>
+
+
+            <button type="button" class="btn btn-primary btn-sm ms-4" id="asignarProfesorJefeBtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg>Asignar profesor jefe</button>
+
+
+            <button style="display: none;" type="button" class="btn btn-danger btn-sm " id="quitarProfesorJefeBtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+              </svg> Quitar profesor jefe</button>
+
+        </div>
+
+
+        <!-- Header for enrolled subjects -->
+        <h5>Asignaturas inscritas </h5>
+
+        <!-- List of enrolled subjects -->
+        <div class="list-group" id="asignaturasInscritasList">
+            
+        </div>
+
+        <!-- Message when no subjects are associated -->
+        <p id="mensajeNoAsignaturas" style="display: none;">No hay asignaturas asociadas</p>
+
+        <!-- Button to assign subjects to the course -->
+    </div>
+
+
+<!-- Offcanvas menu -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Profesor: <span id="offcanvasRightProfesor"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Mostrar usuarios
+            </button>
+            <ul class="dropdown-menu">
+                {% for profesor in profesores %}
+                    <li><a class="dropdown-item" href="#" onclick="asignarProfesor( asignaturaIdGlobal , {{ profesor.user.id }})">{{ profesor.user.username }}</a></li>
+                {% endfor %}
+            </ul>   
+            
+
+            <div class="mt-2">
+                <button class="btn btn-danger" onclick="eliminarAsignatura(event, {{ asignatura.id }})">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                    </svg>eliminar asignatura
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal for confirming the deletion of an asignatura -->
+<div class="modal fade" id="eliminarAsignaturaModal" tabindex="-1" aria-labelledby="eliminarAsignaturaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eliminarAsignaturaModalLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar esta asignatura del curso?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" onclick="eliminarAsignaturaDelCurso()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal for adding courses -->
+<div class="modal fade" id="agregarCursoModal" tabindex="-1" aria-labelledby="agregarCursoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarCursoModalLabel">Agregar curso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form id="agregarCursoForm">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre del curso</label>
+                        <input type="text" class="form-control" id="nombreCurso" name="nombreCurso" required>
+                    </div>
+                    <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for assigning subjects -->
+<div class="modal fade" id="asignarAsignaturasModal" tabindex="-1" aria-labelledby="asignarAsignaturasModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="asignarAsignaturasModalLabel">Asignar Asignaturas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="asignarAsignaturasForm">
+                    {% csrf_token %}
+                    <input type="hidden" id="cursoId" name="cursoId">
+                    <div class="mb-3">
+                        <label for="asignaturas" class="form-label">Seleccionar asignaturas</label>
+                        <select class="form-select" id="asignaturas" name="asignaturas" multiple>
+                            {% for asignatura in asignaturas %}
+                                <option value="{{ asignatura.id }}">{{ asignatura.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" >Asignar</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for assigning a professor -->
+<div class="modal fade" id="asignarProfesorJefeModal" tabindex="-1" aria-labelledby="asignarProfesorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="asignarProfesorModalLabel">Asignar Profesor Jefe</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="agregarProfesorJefeForm">
+                    {% csrf_token %}
+                    <input type="hidden" id="cursoId" name="cursoId">
+                    <div class="mb-3">
+                        <label for="profesores" class="form-label">Seleccionar profesor</label>
+                        <select class="form-select" id="profesores" name="profesores" required>
+                            {% for profesor in profesores %}
+                                {% if not profesor.jefe %}
+                                    <option value="{{ profesor.id }}">{{ profesor.id }}-{{ profesor }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Asignar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- JavaScript code -->
+<script>
+
+    
+    
+    // Function to assign a professor to the selected subject
+    function eliminarProfesor(asignaturaId) {
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'eliminar_asignatura' %}",
+            data: {
+                asignaturaId: asignaturaId,
+                cursoId: cursoIdGlobal, // Agrega el ID del curso seleccionado
+
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function (data) {
+                if (data.success) {
+                    // Optionally, update the page or perform other actions
+                } else {
+                    // Show an error message if needed
+                }
+            },
+            error: function () {
+                // Show an error message if the request fails
+            }
+        });
+    }
+
+    // Function to assign a professor to the selected subject
+    function asignarProfesor(asignaturaId, profesorId) {
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'asignar_profesor_asignatura' %}",
+            data: {
+                asignaturaId: asignaturaId,
+                profesorId: profesorId,
+                cursoId: cursoIdGlobal, // Agrega el ID del curso seleccionado
+
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function (data) {
+                if (data.success) {
+                    // Optionally, update the page or perform other actions
+                } else {
+                    // Show an error message if needed
+                }
+            },
+            error: function () {
+                // Show an error message if the request fails
+            }
+        });
+    }
+
+
+    function abrirModalAsignaturas(cursoId, asignaturasSeleccionadas) {
+        $("#cursoId").val(cursoId);
+        $("#asignaturas").val(asignaturasSeleccionadas);
+        $("#asignarAsignaturasModal").modal("show");
+    }
+
+   
+
+
+    // Function to cargar detalles del profesor jefe
+    function cargarProfesorJefe(cursoId) {
+        
+        $.ajax({
+            type: "POST",
+            url: "{% url 'obtener_profesor_jefe' %}",  // Reemplaza 'obtener_profesor_jefe' con la URL correcta en tu proyecto
+            data: {
+                cursoId: cursoId,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function (data) {
+                if (data.success) {
+                    // Actualiza los elementos HTML con los detalles del profesor jefe
+                    $("#profesorJefeNombre").text(data.profesor.nombre);
+
+                    var asignarProfesorJefeBtn = document.getElementById("asignarProfesorJefeBtn");
+                    if (data.profesor.nombre !== 'No asignado') {
+                        // Deshabilita el botón
+                        asignarProfesorJefeBtn.disabled = true;
+
+                        $("#quitarProfesorJefeBtn").show();
+
+                    } else {
+                        $("#quitarProfesorJefeBtn").hide();
+
+                        // Deshabilita el botón
+                        asignarProfesorJefeBtn.disabled = false;
+                    }
+                    
+                } else {
+                    // Muestra un mensaje de error si es necesario
+                }
+            },
+            error: function () {
+                // Muestra un mensaje de error si la solicitud falla
+            }
+        });
+    }
+
+
+    var cursoIdGlobal;
+    // Function to handle the selection of a course
+    function selectCurso(cursoId, cursoNombre) {
+        cursoIdGlobal = cursoId;
+        // Store the selected cursoId in localStorage
+        localStorage.setItem('selectedCursoId', cursoId);
+        localStorage.setItem('selectedCursoName', cursoNombre);
+
+
+        $("#nombreCurso").text("Nombre del curso: " + cursoNombre);
+        $("#asignarAsignaturasBtn").attr("onclick", "abrirModalAsignaturas(" + cursoId + ")");
+        $("#cursoDetalle").show();
+
+        // Change the header content
+        $("#encabezadoCursos").text("Configuración " + cursoNombre);
+
+        // Make an AJAX request to get the enrolled subjects of the selected course
+        $.ajax({
+            type: "POST",
+            url: "{% url 'obtener_asignaturas' %}",
+            data: {
+                cursoId: cursoId,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function (data) {
+                if (data.success) {
+                    $("#asignaturasInscritasList").html(data.asignaturas_html);
+                    $("#mensajeNoAsignaturas").toggle(data.asignaturas_html === '');
+                } else {
+                    // Show an error message if needed
+                }
+            },
+            error: function () {
+                // Show an error message if the request fails
+
+            }
+        });
+
+        cargarProfesorJefe(cursoId);
+
+
+        
+    }
+
+    
+    var asignaturaIdGlobal;
+
+    $(document).on('click', '.asignatura-link', function(e) {
+        e.preventDefault();
+        asignaturaIdGlobal = $(this).data('id');
+        console.log('info asignatura elegida');
+        console.log(asignaturaIdGlobal);
+        $.ajax({
+            type: "POST", // Cambia el método según lo que sea adecuado para tu caso
+            url: "{% url 'dame_asignatura' %}", // Ruta definida en urls.py
+            data: {
+                asignaturaId: asignaturaIdGlobal,
+                cursoId: cursoIdGlobal,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function(data) {
+                console.log(data.profesor_nombre)
+                $('#offcanvasRightProfesor').text(data.profesor.nombre);
+            },
+            error: function() {
+                // Maneja los errores de la llamada AJAX
+            }
+        });
+
+        $("#offcanvasRight").offcanvas('show');
+        // También puedes almacenar este valor en una variable global o en un elemento oculto si lo necesitas en otros lugares.
+    });
+    
+    
+
+
+        // Function to open the confirmation modal for deleting an asignatura from the curso
+        function abrirModalEliminarAsignatura() {
+            $("#eliminarAsignaturaModal").modal("show");
+        }
+    
+        // Function to delete an asignatura from the curso
+        function eliminarAsignaturaDelCurso() {
+            var cursoId = cursoIdGlobal;  // Obtener el curso actual (puedes modificarlo según tus necesidades)
+    
+            $.ajax({
+                type: "POST",
+                url: "{% url 'eliminar_asignatura_de_curso' %}",
+                data: {
+                    asignatura_id: asignaturaIdGlobal,
+                    curso_id: cursoId,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.success) {
+                        // Cierra el modal y actualiza la lista de asignaturas del curso
+                        $("#eliminarAsignaturaModal").modal("hide");
+                        $("#offcanvasRight").offcanvas('hide');
+
+                        $("#asignaturasInscritasList").html(data.asignaturas_html);
+                    } else {
+                        // Muestra un mensaje de error si es necesario
+                        alert('Error al eliminar la asignatura del curso: ' + data.error);
+                    }
+                },
+                error: function () {
+                    // Muestra un mensaje de error si la solicitud falla
+                    alert('Error de conexión al eliminar la asignatura del curso.');
+                }
+            });
+        }
+    
+
+
+    // Execute when the document is ready
+    $(document).ready(function () {
+
+        // Retrieve the selected cursoId from localStorage and select the course
+        var selectedCursoId = localStorage.getItem('selectedCursoId');
+        var selectedCursoName = localStorage.getItem('selectedCursoName');
+
+        if (selectedCursoId) {
+            selectCurso(selectedCursoId, selectedCursoName);
+        }
+
+        // Show the "Agregar curso" modal when the button is clicked
+        $("#agregar-curso-btn").click(function () {
+            console.log('hola');
+            $("#agregarCursoModal").modal("show");
+        });
+
+        // Handle form submission for adding a course using AJAX
+        $("#agregarCursoForm").submit(function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'guardar_curso' %}",
+                data: $(this).serialize(),
+                success: function (data) {
+                    if (data.success) {
+                        // Close the modal and optionally update the course list
+                        // You can perform actions with the server response here
+                        // Actualiza el menú desplegable de cursos
+                        // Muestra el mensaje de éxito
+                        var successMessage = 'Se ha guardado con exito';
+                        $("#successMessage").text(successMessage).show();
+
+                        // Cierra el modal después de un breve período de tiempo (por ejemplo, 2 segundos)
+                        setTimeout(function () {
+                            $("#agregarCursoModal").modal("hide");
+                        }, 2000);  // 2000 milisegundos (2 segundos)
+
+
+
+                        var dropdownMenu = $(".dropdown-menu");
+                        dropdownMenu.empty();
+                        if (data.cursos.length > 0) {
+                            for (var i = 0; i < data.cursos.length; i++) {
+                                var curso = data.cursos[i];
+                                dropdownMenu.append('<li><button class="dropdown-item" type="button" onclick="selectCurso(' + curso.id + ', \'' + curso.nombre + '\')">' + curso.nombre + '</button></li>');
+                            }
+                        } else {
+                            dropdownMenu.append('<li><button class="dropdown-item" type="button" disabled>No hay cursos</button></li>');
+                        }
+                    } else {
+                        // Show an error message if needed
+                    }
+                },
+                error: function () {
+                    // Show an error message if the request fails
+                }
+            });
+        });
+
+
+        $("#asignarProfesorJefeBtn").click(function () {
+            // Realiza una solicitud AJAX para obtener la lista de usuarios disponibles
+            $.ajax({
+                type: "GET", // O el tipo de solicitud adecuado
+                url: "{% url 'obtener_usuarios_disponibles' %}", // Define la URL correspondiente en tus urls.py
+                success: function (data) {
+                    if (data.success) {
+                        
+
+
+                         // Limpia
+                        var selectProfesores = $("#profesores");
+                        selectProfesores.empty();
+
+                        // Itera a través de los usuarios disponibles y agrega opciones al select
+                        for (var i = 0; i < data.usuarios.length; i++) {
+                            var usuario = data.usuarios[i];
+                            console.log(usuario);
+                            var option = $('<option>', {
+                                value: usuario.id,
+                                text: usuario.username
+                            });
+                            selectProfesores.append(option);
+                        }
+
+                        // Abre el modal
+                        $("#asignarProfesorJefeModal").modal("show");
+            
+                        
+                    } else {
+                        // Muestra un mensaje de error si es necesario
+                    }
+                },
+                error: function () {
+                    // Muestra un mensaje de error si la solicitud falla
+                }
+            });
+        });
+
+        function quitarProfesorJefe() {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'quitar_profesor_jefe' %}",
+                data: {
+                    cursoId: cursoIdGlobal,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.success) {
+                        // Actualiza los elementos HTML con los detalles del profesor jefe
+                        $("#profesorJefeNombre").text('No asignado');
+
+                       
+                        // Deshabilita el botón
+                        asignarProfesorJefeBtn.disabled = false;
+                        
+                        $("#quitarProfesorJefeBtn").hide();
+
+
+                        // Puedes realizar acciones adicionales si es necesario
+                    } else {
+                        // Muestra un mensaje de error si es necesario
+                    }
+                },
+                error: function () {
+                    // Muestra un mensaje de error si la solicitud falla
+                }
+            });
+        }
+
+        $("#quitarProfesorJefeBtn").click(function () {
+            quitarProfesorJefe();
+        });
+
+        $("#agregarProfesorJefeForm").submit(function (event) {
+            event.preventDefault();
+            var cursoId = cursoIdGlobal;
+            var profesorSeleccionado = $("#profesores").val();
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'asignar_profesor_jefe' %}",
+                data: {
+                    cursoId: cursoId,
+                    profesor: profesorSeleccionado,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.success) {
+                        // Close the modal and optionally update the course list
+
+                        console.log('hola que tal');
+                        // Puedes realizar acciones con la respuesta del servidor aquí
+                        cargarProfesorJefe(cursoId); // Actualiza la información del profesor jefe
+
+                        // Cierra el modal y actualiza la página o realiza otras acciones si es necesario
+                        $("#asignarProfesorJefeModal").modal("hide");
+                        // You can perform actions with the server response here
+                    } else {
+                        // Show an error message if needed
+                    }
+                },
+                error: function () {
+                    // Show an error message if the request fails
+                }
+            });
+        });
+
+        // Handle form submission for assigning subjects using AJAX
+        $("#asignarAsignaturasForm").submit(function (event) {
+            event.preventDefault();
+
+            var cursoId = $("#cursoId").val();
+            var asignaturasSeleccionadas = $("#asignaturas").val();
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'asignar_asignaturas' %}",
+                data: {
+                    cursoId: cursoId,
+                    asignaturas: asignaturasSeleccionadas,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.success) {
+
+                        // Cierra el modal y actualiza la lista de asignaturas del curso
+                        $("#eliminarAsignaturaModal").modal("hide");
+                        $("#offcanvasRight").offcanvas('hide');
+
+                        $("#asignaturasInscritasList").html(data.asignaturas_html);
+
+                        
+                        // Close the modal and optionally update the page or perform other actions
+                        $("#asignaturasInscritasList").html(data.asignaturas_html);
+
+                        $("#asignarAsignaturasModal").modal("hide");
+                    } else {
+                        // Show an error message if needed
+                    }
+                },
+                error: function () {
+                    // Show an error message if the request fails
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

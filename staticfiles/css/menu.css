@@ -1,0 +1,83 @@
+/*al nav le doy color blanco y letras negras*/
+/* Styles for screens smaller than 768px */
+/* Styles for screens between 768px and 992px */
+/*oculto el texto que aparece a la izquierda en el menu*/
+nav {
+  background-color: white;
+  color: black; }
+  nav .navbar-brand,
+  nav .nav-link {
+    color: black; }
+    nav .navbar-brand:hover,
+    nav .nav-link:hover {
+      color: #3B71CA; }
+  nav .nav-item {
+    background-color: #3B71CA;
+    margin-right: 60px; }
+    nav .nav-item:last-child {
+      margin-right: 0; }
+
+.navbar-nav .nav-link.active {
+  color: black;
+  box-shadow: none; }
+
+.navbar-nav .nav-link.show {
+  color: black;
+  box-shadow: none; }
+
+.navbar .has-megamenu {
+  position: static !important;
+  border: 0;
+  outline: 0; }
+
+.navbar .megamenu {
+  position: relative;
+  z-index: 20;
+  padding: 50px;
+  border: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-radius: 0px;
+  margin-top: 0;
+  -webkit-box-shadow: 0 4px 6px -6px #222;
+  -moz-box-shadow: 0 4px 6px -6px #222;
+  box-shadow: 0 4px 6px -6px #222; }
+
+#contenedor {
+  display: flex;
+  justify-content: center; }
+
+.col-megamenu li a:hover {
+  color: #3B71CA; }
+
+@media (max-width: 767px) {
+  #texto {
+    display: none; }
+  #contenedor {
+    display: flex;
+    justify-content: left;
+    padding: 5px; }
+  #padre {
+    padding: 3px; }
+  .col-megamenu li:hover {
+    background-color: #f0f0f0; }
+  #miDiv {
+    width: 100%; } }
+
+@media (min-width: 768px) and (max-width: 992px) {
+  #texto {
+    display: none; }
+  #contenedor {
+    display: flex;
+    justify-content: center; }
+  #miDiv {
+    flex: 1;
+    margin: 0;
+    padding: 0; }
+  #miDiv2 {
+    flex: 1;
+    margin: 0;
+    padding: 0; } }
+
+/*# sourceMappingURL=menu.css.map */
