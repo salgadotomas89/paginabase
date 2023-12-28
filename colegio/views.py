@@ -131,8 +131,6 @@ def obtener_profesor_jefe(request):
     }
     return JsonResponse(data)
 
-
-
 def guardar_asignatura(request):
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
@@ -161,8 +159,6 @@ def guardar_curso(request):
     else:
         return JsonResponse({'success': False, 'error': 'Método de solicitud no válido'})
 
-
-
 def obtener_asignaturas(request):
     if request.method == 'POST':
         curso_id = request.POST.get('cursoId')
@@ -183,8 +179,6 @@ def obtener_asignaturas(request):
         asignaturas_html = render_to_string('asignaturas_list.html', context)
         return JsonResponse({'success': True, 'asignaturas_html': asignaturas_html})
 
-
-
 def asignar_asignaturas(request):
     if request.method == 'POST':
         curso_id = request.POST.get('cursoId')
@@ -204,8 +198,6 @@ def asignar_asignaturas(request):
 
             # Guardar el curso u realizar cualquier otro paso necesario
             curso.save()
-
-
             asignaturas = list(curso.asignaturas.all())
 
             context = {'asignaturas': asignaturas}
@@ -409,21 +401,10 @@ def profesores(request):
     return render(request, 'profesores.html')
 
 def inicio(request):
-    apariencia = AppearanceSettings.objects.first()
-    if not apariencia:
-        apariencia = AppearanceSettings.objects.create()
+    
     comunicados = Comunicado.objects.all().order_by('-fecha')[:4]
     eventos = Evento.objects.all().order_by('-fecha')[:4]
     noticias = Noticia.objects.all()
-
-    #traigo la información guardada del colegio como el nombre, direccion, email
-    colegio = Colegio.objects.get()
-
-    secciones = ['Misión', 'Visión', 'Directiva', 'Reglamentos', 'Proyecto educativo', 'Valores']
-
-    # Split the 'secciones' list into two parts
-    secciones_part1 = secciones[:3]
-    secciones_part2 = secciones[3:]
 
     try:
         seccion_comunicado = Comunicados.objects.get()
@@ -431,15 +412,10 @@ def inicio(request):
         seccion_comunicado = None
 
     context = {
-                'apariencia': apariencia,
                'comunicado': seccion_comunicado,
                'comunicados': comunicados,
-               'secciones': secciones,
-               'secciones_part1': secciones_part1,
-                'secciones_part2': secciones_part2,
                'noticias': noticias,
                'eventos': eventos,
-               'colegio': colegio,
                }
     
     return render(request, 'home.html', context)

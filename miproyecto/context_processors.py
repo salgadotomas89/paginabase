@@ -1,19 +1,20 @@
-
-
-
-from colegio.models import Colegio
-
+from colegio.models import AppearanceSettings, Colegio
 
 def datos_globales(request):
     colegio = Colegio.objects.first()  # Obtener el único objeto del modelo Colegio
 
-   
+    secciones = ['Misión', 'Visión', 'Directiva', 'Reglamentos', 'Proyecto educativo', 'Valores']
 
-    lista =  ['directiva','misión', 'visión', 'direccion', 'reglamentos']
+    apariencia = AppearanceSettings.objects.first()
+    if not apariencia:
+        apariencia = AppearanceSettings.objects.create()
 
-              
-               
-    return {
-        'colegio': colegio,
-        'lista': lista,
-    }
+    # Split the 'secciones' list into two parts
+    secciones_part1 = secciones[:3]
+    secciones_part2 = secciones[3:]
+       
+    return { 'colegio': colegio, 'secciones': secciones,
+               'secciones_part1': secciones_part1,
+                'secciones_part2': secciones_part2,
+                                 'apariencia': apariencia,
+ }

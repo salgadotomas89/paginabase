@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="{% sass_src 'css/texto.scss' %}" type="text/css" />
     <!--...otras etiquetas...-->
 
-    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/configuracion/base.css' %}">
+
     <!--estilos del menu-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/menu/menu.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/menu/menumovil.css' %}">
@@ -39,7 +40,7 @@
     <!--link estilos del carousel de noticias de la pagina principal -->
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
 
-    
+    {% include "common_styles.html" %}
 </head>
 
 <body>
@@ -57,7 +58,7 @@
                 </li>
                 <!-- ... (otros contenidos) ... -->
                 <li class="nav-item">
-                    <a class="nav-link" >Noticias</a>
+                    <a href="{% url 'noticias' 0 %}" class="nav-link">Noticias</a>
                 </li>
                 <li class="nav-item colegio">
                     <a class="nav-link">Colegio&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">

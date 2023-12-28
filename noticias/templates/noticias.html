@@ -1,7 +1,10 @@
-{% extends "layout.html" %}
+{% extends "layout_updated.html" %}
 {% load static %} 
 {% block body %}
 {% load sass_tags %}
+
+{% include "common_styles.html" %}
+
 
 
 <link rel="stylesheet" href="{% sass_src 'css/noticias/estilos.scss' %}"  type="text/css" />

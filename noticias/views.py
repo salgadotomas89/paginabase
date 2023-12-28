@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.shortcuts import redirect, render
 from django.http import Http404, JsonResponse
+from colegio.models import Colegio
 from noticias.forms import FormNoticia
 from noticias.models import Images, Noticia
 
