@@ -5,14 +5,12 @@
 
 {% include "common_styles.html" %}
 
-
-
 <link rel="stylesheet" href="{% sass_src 'css/noticias/estilos.scss' %}"  type="text/css" />
 <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
-
 <link rel="stylesheet" href="{% sass_src 'css/estilos.scss' %}" type="text/css" />
 
  
+
 <div class="container mt-4 py-4">
 
   <div class="nav-scroller py-1 mb-2">
@@ -34,7 +32,7 @@
   
 </div>
 
-<main class="container">
+<div class="container">
   <div class="p-4 p-md-5 mb-4 rounded text-bg-light">
     <div class="col-md-6 px-0">
       <h1 class="display-4 fst-italic">NOTICIAS</h1>
@@ -119,7 +117,6 @@
     </div>
 
   </div>
-</main>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -202,59 +199,9 @@
     </div>
   </div>
    
-  <script>
-    (function () {
-      'use strict';
+</div>
   
-      // Fetch the form we want to apply custom Bootstrap validation styles to
-      var form = document.getElementById('noticia-form');
-  
-      // Prevent form submission if there are invalid fields
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-  
-        form.classList.add('was-validated');
-      }, false);
-    })();
-  
-    document.addEventListener('DOMContentLoaded', function () {
-      const deleteLinks = document.querySelectorAll('.delete-link');
-  
-      function deleteNoticia(id) {
-        $.ajax({
-          type: 'DELETE',
-          url: `/noticias/delete/${id}`,
-          headers: {
-            'X-CSRFToken': '{{ csrf_token }}',
-          },
-          success: function (data) {
-            const deletedNoticia = document.querySelector(`[data-id="${id}"]`);
-            if (deletedNoticia) {
-              deletedNoticia.closest('.col-md-6').remove();
-            }
-
-          },
-          error: function (error) {
-            console.error('Error al eliminar noticia:', error);
-          }
-        });
-      }
-  
-      deleteLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
-          event.preventDefault();
-          const id = this.getAttribute('data-id');
-          if (confirm('¿Estás seguro de que quieres eliminar esta noticia?')) {
-            deleteNoticia(id);
-          }
-        });
-      });
-    });
-  </script>
-  
+<script src="{% static 'js/script.js' %}"></script>
 
 
 

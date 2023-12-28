@@ -9,9 +9,11 @@
 }
 
 /* Estilos para la barra de navegación principal. */
-#noticias{
+.main-content {
     margin-top: var(--menu-height, 80px) !important;
 }
+
+
 .navbar {
     height: var(--menu-height, 80px);  
     display: flex;                                    /* Utiliza flexbox para distribuir elementos en la barra. */
