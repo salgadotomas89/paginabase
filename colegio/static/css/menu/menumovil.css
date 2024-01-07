@@ -1,5 +1,6 @@
 /* Definición de variables CSS */
 :root {
+
     --menu-background-color: #FFFFFF;         /* Color de fondo para el menú principal */
     --menu-text-color: #000000;               /* Color de texto para el menú principal */
     --menu-height: 80px;                      /* Altura del menú principal */
@@ -10,6 +11,9 @@
     --border-color: #cccccc;  /* Gris claro para el borde */
 
 }
+
+
+
 
 /* Estilos para el botón de hamburguesa */
 .btn-hamburger {
@@ -33,7 +37,7 @@
     pointer-events: none;                   /* No bloquear eventos en otros elementos */
     transition: opacity 0.5s, transform 0.5s;  /* Transición suave para abrir y cerrar */
     transform: translateY(-20px);           /* Comienza ligeramente por encima de su posición final */
-    background-color: #fff;                 /* Color de fondo blanco */
+    background-color: var(--menu-background-color) !important;
     z-index: 1000;                          /* Asegura que aparezca sobre otros elementos */
     border: none;
     border-radius: 0; /* Establece el radio del borde a 0 para hacerlo cuadrado */

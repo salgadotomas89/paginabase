@@ -8,10 +8,6 @@
     --color_principal_texto: #000000;
 }
 
-
-
-
-
 /* Estilos para la barra de navegación principal. */
 .main-content {
     margin-top: var(--menu-height, 80px) !important;
