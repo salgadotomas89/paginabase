@@ -6,7 +6,7 @@ from noticias.models import Noticia
 class FormNoticia(forms.ModelForm):
     class Meta:
         model = Noticia
-        fields = ["titulo", "subtitulo","texto","redactor", "galeria"]
+        fields = ["titulo", "subtitulo","texto","redactor", "galeria", "audio"]
 
 class FormImagesNoticias(FormNoticia): #extending form
     images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))

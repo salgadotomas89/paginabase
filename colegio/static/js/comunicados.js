@@ -8,7 +8,7 @@ $(document).ready(function() {
     //selectedColor = selectedColor.replace('#', '');
     
     // Construir la URL completa
-    var url = 'seccion/comunicados/' + encodeURIComponent(selectedColor) ;
+    var url = 'comunicados/seccion/color/' + encodeURIComponent(selectedColor) ;
 
 
     var csrfToken = Cookies.get('csrftoken');
@@ -50,7 +50,7 @@ $(document).ready(function() {
 
     // Realizar la llamada a la API de Django para guardar los datos
     $.ajax({
-      url: 'guardar-comunicado/',
+      url: 'comunicados/guardar-comunicado/',
       method: 'POST',
       data: formData,
       processData: false,

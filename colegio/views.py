@@ -402,7 +402,7 @@ def profesores(request):
 
 def inicio(request):
     
-    comunicados = Comunicado.objects.all().order_by('-fecha')[:4]
+    comunicados = Comunicado.objects.all().order_by('-fecha')[:5]
     eventos = Evento.objects.all().order_by('-fecha')[:4]
     noticias = Noticia.objects.all()
 

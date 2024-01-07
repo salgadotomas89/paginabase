@@ -39,4 +39,8 @@ h1 {
   .featurette-heading {
     margin-top: 7rem; } }
 
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  color: black !important; }
+
 /*# sourceMappingURL=carousel.css.map */

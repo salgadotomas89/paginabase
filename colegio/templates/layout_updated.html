@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    {% block title %}<title>EducaWebs</title>{% endblock %}
+    {% block title %}<title>{{colegio.nombre}}</title>{% endblock %}
 
     <!--Jquery-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -25,9 +25,14 @@
     <link rel="stylesheet" href="{% sass_src 'css/profesores.scss' %}" type="text/css" />
     <link rel="stylesheet" href="{% sass_src 'css/carousel.scss' %}" type="text/css" />
     <link rel="stylesheet" href="{% sass_src 'css/texto.scss' %}" type="text/css" />
+    <link rel="stylesheet" href="{% sass_src 'css/comunicados.scss' %}" type="text/css" />
+
     <!--...otras etiquetas...-->
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/configuracion/base.css' %}">
+
+    <!--archivo donde encuentro los estilos de las secciones del home-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home/secciones/estilos.css'%}">
 
     <!--estilos del menu-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/menu/menu.css' %}">
@@ -38,7 +43,6 @@
     <!--link estilos de la pagina configuracion-->
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
     <!--link estilos del carousel de noticias de la pagina principal -->
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
 
     {% include "common_styles.html" %}
 </head>
@@ -65,7 +69,9 @@
                         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
                       </svg></a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'configuracion' %}">Fotos</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'configuracion' %}">Condiguración</a>
                 </li>

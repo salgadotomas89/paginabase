@@ -12,6 +12,8 @@ class Noticia(models.Model):
     #False = foto/s no este en la galeria, True = foto/s aparezca en la galeria
     galeria = models.BooleanField(default=False, blank=True, null=True)
     tema = models.CharField(max_length=100, null=True, blank=True)
+    audio = models.FileField(upload_to='noticias/audios', blank=True, null=True)
+    likes = models.PositiveIntegerField(default=0)
 
 
 #modelo que contiene foto relacionada a una noticia 

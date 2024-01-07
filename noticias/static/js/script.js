@@ -1,10 +1,8 @@
 (function () {
     'use strict';
 
-    // Fetch the form we want to apply custom Bootstrap validation styles to
     var form = document.getElementById('noticia-form');
 
-    // Prevent form submission if there are invalid fields
     form.addEventListener('submit', function (event) {
       if (!form.checkValidity()) {
         event.preventDefault();

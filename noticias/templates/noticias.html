@@ -7,7 +7,6 @@
 
 <link rel="stylesheet" href="{% sass_src 'css/noticias/estilos.scss' %}"  type="text/css" />
 <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
-<link rel="stylesheet" href="{% sass_src 'css/estilos.scss' %}" type="text/css" />
 
  
 
@@ -37,13 +36,17 @@
     <div class="col-md-6 px-0">
       <h1 class="display-4 fst-italic">NOTICIAS</h1>
       <p class="lead my-3">¡Bienvenido a nuestra sección de noticias, aquí encontrarás las últimas novedades y eventos educativos!.</p>
-      {% if user.is_authenticated %}
-  
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Agregar noticia
-      </button>
       
-      {% endif %}
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Agregar noticia
+      </button>
+
+
+      <!--{% if user.is_authenticated %}-->
+  
+      
+      
+      <!--{% endif %}-->
     </div>
   </div>
 
@@ -65,7 +68,10 @@
               {% if noticia.images_set.first %}
                 <img class="bd-placeholder-img" width="250" height="250" src="{{ noticia.images_set.first.image.url }}" alt="Imagen de la noticia">
               {% endif %}
+              
             </div>
+
+            
           </div>
         </div>
     {% endfor %}
@@ -95,6 +101,34 @@
           <h4 class="fst-italic">Acerca de noticias</h4>
           <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
         </div>
+
+        <div class="position-sticky" style="top: 2rem;">
+          <div class="p-4 mb-3 bg-success rounded">
+              <h4 class="d-flex fst-italic"> Revive esta noticia <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-soundwave" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8.5 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5m-2 2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5m4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5m-6 1.5A.5.5 0 0 1 5 6v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m8 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m-10 1A.5.5 0 0 1 3 7v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5m12 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5"/>
+              </svg> </h4>
+              <p class="mb-0">A continuación puede reproducir y escuchar un audio sobre esta noticia:</p>
+              
+              {% if principal.audio %}
+                  <audio controls>
+                    <source src="{{ principal.audio.url }}" type="audio/mp3">
+                    <source src="{{ principal.audio.url }}" type="audio/m4a">
+                    <source src="{{ principal.audio.url }}" type="audio/ogg">
+                    <source src="{{ principal.audio.url }}" type="audio/wav">
+                    Tu navegador no soporta la etiqueta de audio.
+                  </audio>
+              {% else %}
+                  <p>No hay archivo de audio disponible</p>
+              {% endif %}
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-danger" onclick="darLike({{ principal.id }})">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+              <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"></path>
+          </svg>
+          Me gusta 
+        </button>
 
         <div class="p-4">
           <h4 class="fst-italic">Archivos</h4>
@@ -160,6 +194,15 @@
               <input name="imagenes" type="file" multiple class="form-control-file" id="exampleFormControlFile1" required>
               <div class="invalid-feedback">
                 Please select at least one image.
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="exampleFormControlFile2">Audio</label>
+              <input name="audio" type="file" multiple class="form-control-file" id="exampleFormControlFile2" required>
+              <div class="invalid-feedback">
+                Suba un audio.
               </div>
             </div>
           

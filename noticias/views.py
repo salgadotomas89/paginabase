@@ -44,6 +44,7 @@ def noticias(request, id):
         'noticias': otras_noticias,
         'principal': ultima_noticia,
     }
+    
 
     if request.method == 'POST':
         form_noticia = FormNoticia(request.POST, request.FILES)

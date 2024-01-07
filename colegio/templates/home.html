@@ -3,112 +3,131 @@
 {% block body %}
 
 {% load static %} 
-
-    
-
-    <section id="noticias" class="container-fluid text-center py-4 mt-4 bg-light">
-        <h1 class="display-5 fw-bold lh-1 mb-3 py-4">Noticias 222</h1>
-        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                
-
-                {% for noticia in noticias %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                  <div class="container col-xxl-8">
-                    <div class="row flex-lg-row-reverse align-items-center">
-                      <div class="col-10 col-sm-8 col-lg-6">
-                        {% if noticia.images_set.first %}
-                          <img src="{{ noticia.images_set.first.image.url }}" class="img-fluid" alt="Bootstrap Themes" width="700" height="500">
-                        {% endif %}
-                        <!--
-                        {% for img in noticia.images_set.all %}
-                            {% if not forloop.first %}
-                                <img src="{{ img.image.url }}" class="img-fluid" alt="Bootstrap Themes" width="700" height="500">
-                            {% endif %}
-                        {% endfor %}-->
-                      </div>
-                      <div class="col-lg-6">
-                        <h1 class="display-5 fw-bold lh-1 mb-3">{{ noticia.titulo }}</h1>
-                        <p class="lead">Diseña y personaliza rápidamente sitios utilizando preconstruidos y potentes complementos de JavaScript.</p>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                          <a href="{% url 'noticias' id=noticia.id %}"  class="btn btn-primary btn-lg px-4 me-md-2" >Leer más..</a>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+  
+<section id="noticias" class="container-fluid text-center py-4 mt-4 ">
+  <div id="myCarousel" class="carousel slide " data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for noticia in noticias %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="container h-100">
+          <div class="row align-items-center justify-content-center  g-4 h-100">
+            <div class="col-md-6 text-center text-md-start">
+              <div class="d-flex flex-column mx-lg-5 py-4 px-5 ">
+                <h2 class="display-6 fw-bold lh-1 mb-3">{{ noticia.titulo }}</h2>
+                <p class="lead">Diseña y personaliza rápidamente sitios utilizando preconstruidos y potentes complementos de JavaScript.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                  <a href="{% url 'noticias' id=noticia.id %}" class="btn btn-primary btn-lg px-4">Leer más..</a>
                 </div>
-              {% endfor %}
-              
-
-
-              
-            
+              </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+              {% if noticia.images_set.first %}
+              <img src="{{ noticia.images_set.first.image.url }}" class="d-block" style="width: 700px; height: 500px;" alt="{{ noticia.titulo }}">
+              {% endif %}
+            </div>
           </div>
-    </section>
-
-
-    <div class="color-section container-fluid  h-50  text-start py-5" >
-        <h1 class="scroll-animation display-5 fw-bold text-center">Comunicados</h1>
-        <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#colorModal">Elegir color</button>
-            <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#nuevoComunicado">Nuevo comunicado</button>
-            <a  type="button" class="btn btn-primary btn-sm me-2" >Ver todos</a>
         </div>
-
-    <div class="container-fluid col-xxl-12 ">
-
-        <div class="row flex-lg-row align-items-center ">
-
-                <div class="col-10 col-sm-8 col-lg-6 py-4  d-flex justify-content-center">
-                    <img src="{% static 'images/com.png' %}" class=" img-fluid" alt="Bootstrap Themes" width="700" height="400" >
-                </div>
-
-                <div class="col-lg-6">
-                
-                    <div class="list-group list-group-flush rounded-4 ">
-                        {% for comunicado in comunicados %}
-                            <a href="#" class="list-group-item list-group-item-action border-0 " aria-current="true">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{comunicado.titulo}}</h5>
-                                
-                                <span class="badge bg-primary rounded-pill"><small>{{comunicado.fecha}}</small></span>
-                                
-
-                            </div>
-                            <p class="mb-1" >{{comunicado.texto|truncatewords:14}}</p>
-                            <small  >@{{comunicado.autor}}</small>
-                            </a>
-                       {% endfor %}
-                          
-                      </div>  
-                  
-                </div>
-                
-        </div>
+      </div>
+      {% endfor %}
     </div>
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+      </svg></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+      </svg></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
+
+
+
+
+
+    <div class="py-5 bg-warning text-center  " id="sombra-abajo">
+      <h1 class="display-4 fw-bold pulsate">
+             Calendario de evaluaciones
+      </h1>
+      <p class="lead mb-4">Queridos apoderados les informamos que toda información sobre las proximas evaluaciones la encontrarán aquí
+              </p>
+
+      <a  type="button" class="btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold position-relative">
+        Ver calendario
+      </a>
+  </div>
+
+
+
+
+
+<div class="color-section container-fluid  h-50  text-start py-5"  >
+  
+
+  <div class="container-fluid col-xxl-12 ">
+
+    <div class="row flex-lg-row align-items-center ">
+
+            <div class="col-10 col-sm-8 col-lg-6 py-4  d-flex justify-content-center ">
+                <img src="{% static 'images/cm1.png' %}" class=" img-fluid" alt="Bootstrap Themes" width="400" height="400" >
+            </div>
+
+            <div class="col-lg-6">
+
+              <h1 class="display-4 fw-bold mb-4">Comunicados <br>Información oficial
+                para nuestra comunidad.</h1>
+              <p class="lead mb-4">
+                Explore los comunicados más recientes del colegio, abarcando temas esenciales en diversas áreas académicas y administrativas. Manténgase informado con las últimas actualizaciones y anuncios importantes.              </p>
+              <a href="{% url 'comunicados' %}" class="btn btn-primary btn-lg">Ver todos</a>
+              <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#nuevoComunicado">Nuevo comunicado</button>
+              <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#colorModal">Elegir color</button>
+              <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#colorModal">Cambiar imagen</button>
+
+            </div>
+            
+             
+
+                  
+              
+            </div>
+            
+    </div>
+  </div>
 
 </div>
 
 
+<div class="py-5 bg-white text-center  " id="sombra-arriba">
+  <h1 class="display-4 fw-bold pulsate">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="pulsate bi bi-megaphone-fill" viewBox="0 0 16 16">
+          <path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-11zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25.222 25.222 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56V3.224zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009a68.14 68.14 0 0 1 .496.008 64 64 0 0 1 1.51.048zm1.39 1.081c.285.021.569.047.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a65.81 65.81 0 0 1 1.692.064c.327.017.65.037.966.06z"/>
+      </svg>
+         Notas
+  </h1>
 
-<div class="bg-dark  py-5 text-center">
+  <p class="px-5">Queridos apoderados les informamos que toda información oficial la encontrarán en el siguiente link
+          </p>
+
+  <a  type="button" class="btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold position-relative">
+
+                Ver todos
+                
+      <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-dark rounded-circle">
+          <span class="visually-hidden">New alerts</span>
+      </span>
+  </a>
+</div>
+
+
+<div class="bg-dark  py-5 text-center " >
     <div class=" container-fluid py-5">
-        <h1 class="scroll-animation display-5 fw-bold text-white">Eventos proximos</h1>
+        <h1 class=" display-5 fw-bold text-white">Eventos proximos</h1>
         <!--<p class="fs-5 mb-4">onsive grid system and powerful JavaScript plugins.</p>-->
         <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#colorModal">Color de fondo</button>
@@ -121,7 +140,7 @@
 
             {% for evento  in eventos %}
 
-            <div class="col-sm-4 col-md-3 py-3 scroll-animation border-0 ">
+            <div class="col-sm-4 col-md-3 py-3  border-0 ">
                 <div class="card text-dark bg-info mb-3">
                     <div class="card-header">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
@@ -153,7 +172,7 @@
     
 
     <section id="profesores" class="container-fluid  text-center py-4  mt-4">
-        <h1 class="scroll-animation display-5 fw-bold">Profesores</h1>
+        <h1 class=" display-5 fw-bold">Profesores</h1>
 
         <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#colorModal">Ver todos</button>
@@ -163,7 +182,7 @@
             <!--columna 1-->
             <div id="super" class="col  ">
                 <!--card height 75% del div padre, sin borde-->
-                <div id="carta" class="scroll-animation card h-100 border-0">
+                <div id="carta" class=" card h-100 border-0">
                     <div id="imagen-carta" class="h-100 card-img-top bg-danger">
                         <img class="h-200 w-100"  src="{% static 'images/teacher1.png' %}"/>
                     </div>

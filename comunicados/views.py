@@ -9,7 +9,7 @@ from comunicados.models import Comunicado, Comunicados
 def actualizar_seccion_comunicados(request, color):
     Comunicados.objects.filter(id=1).update(background=color)
 
-    return redirect('home')
+    return render(request, 'home.html')
 
 def guardar_comunicado(request):
     if request.method == 'POST':
@@ -17,9 +17,7 @@ def guardar_comunicado(request):
         titulo = request.POST.get('titulo')
         texto = request.POST.get('texto')
         autor = request.POST.get('autor')
-
         # Realizar las operaciones necesarias para guardar los datos en el modelo
-        
         # Ejemplo: Crear un nuevo objeto de Comunicado y guardar los datos
         comunicado = Comunicado(titulo=titulo, texto=texto, autor=autor)
         comunicado.save()
@@ -28,3 +26,11 @@ def guardar_comunicado(request):
     else:
         return JsonResponse({'success': False, 'error': 'Método de solicitud no válido'})
     
+
+def comunicados(request):
+    comunicados = Comunicado.objects.all()
+    print(comunicados)
+    context = {
+        'comunicados' : comunicados,
+    }
+    return render(request, 'comunicados.html', context)
