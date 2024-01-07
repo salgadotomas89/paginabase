@@ -47,59 +47,42 @@
 </section>
 
 
-
-
-
-
     <div class="py-5 bg-warning text-center  " id="sombra-abajo">
       <h1 class="display-4 fw-bold pulsate">
              Calendario de evaluaciones
       </h1>
-      <p class="lead mb-4">Queridos apoderados les informamos que toda información sobre las proximas evaluaciones la encontrarán aquí
-              </p>
-
+      <p class="lead mb-4">Queridos apoderados les informamos que toda información sobre las proximas
+         evaluaciones la encontrarán aquí</p>
       <a  type="button" class="btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold position-relative">
         Ver calendario
       </a>
-  </div>
+    </div>
 
 
 
 
-
+<!--color section se encuentra dentro de common_styles.html y es para manejar el cambio de color de fondo-->
 <div class="color-section container-fluid  h-50  text-start py-5"  >
-  
-
   <div class="container-fluid col-xxl-12 ">
-
     <div class="row flex-lg-row align-items-center ">
-
             <div class="col-10 col-sm-8 col-lg-6 py-4  d-flex justify-content-center ">
                 <img src="{% static 'images/cm1.png' %}" class=" img-fluid" alt="Bootstrap Themes" width="400" height="400" >
             </div>
-
+            
             <div class="col-lg-6">
-
-              <h1 class="display-4 fw-bold mb-4">Comunicados <br>Información oficial
-                para nuestra comunidad.</h1>
+              <h1 class="display-4 fw-bold mb-4">Comunicados <br>Información oficialpara nuestra comunidad.</h1>
               <p class="lead mb-4">
-                Explore los comunicados más recientes del colegio, abarcando temas esenciales en diversas áreas académicas y administrativas. Manténgase informado con las últimas actualizaciones y anuncios importantes.              </p>
+                Explore los comunicados más recientes del colegio, 
+                abarcando temas esenciales en diversas áreas académicas y 
+                administrativas. Manténgase informado con las últimas actualizaciones y anuncios importantes.</p>
               <a href="{% url 'comunicados' %}" class="btn btn-primary btn-lg">Ver todos</a>
               <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#nuevoComunicado">Nuevo comunicado</button>
               <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#colorModal">Elegir color</button>
               <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#colorModal">Cambiar imagen</button>
 
-            </div>
-            
-             
-
-                  
-              
-            </div>
-            
+            </div>           
     </div>
   </div>
-
 </div>
 
 
@@ -113,14 +96,8 @@
 
   <p class="px-5">Queridos apoderados les informamos que toda información oficial la encontrarán en el siguiente link
           </p>
-
   <a  type="button" class="btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold position-relative">
-
-                Ver todos
-                
-      <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-dark rounded-circle">
-          <span class="visually-hidden">New alerts</span>
-      </span>
+      Ver todos         
   </a>
 </div>
 
@@ -133,13 +110,8 @@
             <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#colorModal">Color de fondo</button>
             <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#nuevoEvento">Nuevo evento</button>
         </div>
-
-
-
         <div class="row" data-masonry='{"percentPosition": true }'>
-
             {% for evento  in eventos %}
-
             <div class="col-sm-4 col-md-3 py-3  border-0 ">
                 <div class="card text-dark bg-info mb-3">
                     <div class="card-header">
@@ -154,14 +126,8 @@
                         <p class="card-text">La reunión de apoderados de 6to será el día miercoles 12 a las 18:00 hrs</p>
                     </div>
                 </div>
-            </div>
-
-            
+            </div>   
             {% endfor %}
-           
-
-          
-
         </div>
         <!--
                         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">

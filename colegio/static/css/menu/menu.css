@@ -89,12 +89,24 @@
 }
 
 /* Estilos para los enlaces dentro del mega menú. */
+
 .mega-menu a {
     color: var(--mega-menu-text-color);               /* Utiliza la variable CSS para el color del texto. */
     text-decoration: none;                            /* Remueve el subrayado de los enlaces. */
     padding: 8px;                                     /* Añade padding alrededor de los enlaces. */
     text-align: center;                               /* Centra el texto de los enlaces. */
 }
+
+.mega-menu h2{
+    color: var(--mega-menu-text-color);               /* Utiliza la variable CSS para el color del texto. */
+}
+
+
+.mega-menu p{
+    color: var(--mega-menu-text-color);               /* Utiliza la variable CSS para el color del texto. */
+}
+
+
 
 .mega-menu a:hover {
     color: var(--color_principal_texto);                             /* Cambia el color al azul */
