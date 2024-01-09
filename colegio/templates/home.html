@@ -3,6 +3,10 @@
 {% block body %}
 
 {% load static %} 
+
+<style>
+  
+</style>  
   
 <section id="noticias" class="container-fluid text-center py-4 mt-4 ">
   <div id="myCarousel" class="carousel slide " data-bs-ride="carousel">
@@ -53,6 +57,12 @@
       </h1>
       <p class="lead mb-4">Queridos apoderados les informamos que toda información sobre las proximas
          evaluaciones la encontrarán aquí</p>
+
+
+         <p class="lead mb-4">Queridos apoderados les informamos que toda información sobre las proximas
+          evaluaciones la encontrarán aquí</p>
+          <p class="lead mb-4">Queridos apoderados les informamos que toda información sobre las proximas
+            evaluaciones la encontrarán aquí</p>
       <a  type="button" class="btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold position-relative">
         Ver calendario
       </a>
@@ -77,7 +87,9 @@
                 administrativas. Manténgase informado con las últimas actualizaciones y anuncios importantes.</p>
               <a href="{% url 'comunicados' %}" class="btn btn-primary btn-lg">Ver todos</a>
               <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#nuevoComunicado">Nuevo comunicado</button>
-              <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#colorModal">Elegir color</button>
+              <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#colorModal"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-paint-bucket" viewBox="0 0 16 16">
+                <path d="M6.192 2.78c-.458-.677-.927-1.248-1.35-1.643a3 3 0 0 0-.71-.515c-.217-.104-.56-.205-.882-.02-.367.213-.427.63-.43.896-.003.304.064.664.173 1.044.196.687.556 1.528 1.035 2.402L.752 8.22c-.277.277-.269.656-.218.918.055.283.187.593.36.903.348.627.92 1.361 1.626 2.068.707.707 1.441 1.278 2.068 1.626.31.173.62.305.903.36.262.05.64.059.918-.218l5.615-5.615c.118.257.092.512.05.939-.03.292-.068.665-.073 1.176v.123h.003a1 1 0 0 0 1.993 0H14v-.057a1 1 0 0 0-.004-.117c-.055-1.25-.7-2.738-1.86-3.494a4 4 0 0 0-.211-.434c-.349-.626-.92-1.36-1.627-2.067S8.857 3.052 8.23 2.704c-.31-.172-.62-.304-.903-.36-.262-.05-.64-.058-.918.219zM4.16 1.867c.381.356.844.922 1.311 1.632l-.704.705c-.382-.727-.66-1.402-.813-1.938a3.3 3.3 0 0 1-.131-.673q.137.09.337.274m.394 3.965c.54.852 1.107 1.567 1.607 2.033a.5.5 0 1 0 .682-.732c-.453-.422-1.017-1.136-1.564-2.027l1.088-1.088q.081.181.183.365c.349.627.92 1.361 1.627 2.068.706.707 1.44 1.278 2.068 1.626q.183.103.365.183l-4.861 4.862-.068-.01c-.137-.027-.342-.104-.608-.252-.524-.292-1.186-.8-1.846-1.46s-1.168-1.32-1.46-1.846c-.147-.265-.225-.47-.251-.607l-.01-.068zm2.87-1.935a2.4 2.4 0 0 1-.241-.561c.135.033.324.11.562.241.524.292 1.186.8 1.846 1.46.45.45.83.901 1.118 1.31a3.5 3.5 0 0 0-1.066.091 11 11 0 0 1-.76-.694c-.66-.66-1.167-1.322-1.458-1.847z"/>
+              </svg></button>
               <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#colorModal">Cambiar imagen</button>
 
             </div>           
@@ -102,33 +114,44 @@
 </div>
 
 
-<div class="bg-dark  py-5 text-center " >
-    <div class=" container-fluid py-5">
-        <h1 class=" display-5 fw-bold text-white">Eventos proximos</h1>
+<div class="bg-dark py-5 text-center " >
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold text-white">Eventos proximos</h1>
         <!--<p class="fs-5 mb-4">onsive grid system and powerful JavaScript plugins.</p>-->
-        <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#colorModal">Color de fondo</button>
-            <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#nuevoEvento">Nuevo evento</button>
-        </div>
+       
         <div class="row" data-masonry='{"percentPosition": true }'>
             {% for evento  in eventos %}
-            <div class="col-sm-4 col-md-3 py-3  border-0 ">
-                <div class="card text-dark bg-info mb-3">
-                    <div class="card-header">
+            <div class="col-sm-4 col-md-3 py-3 ">
+                <div class="card text-dark bg-light mb-3 border-0 rounded-4">
+                    <div class="card-header ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
                             <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
                             <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                        </svg>
+                        </svg> Fecha : 
                         {{evento.fecha}}
                     </div>
                     <div class="card-body">
-                        <h5 class="fw-bold card-title">Reunion sexto básico</h5>
-                        <p class="card-text">La reunión de apoderados de 6to será el día miercoles 12 a las 18:00 hrs</p>
-                    </div>
+                        <h5 class="fw-bold card-title">{{evento.titulo}}</h5>
+                        <p class="card-text">{{evento.texto}}</p>
+                        
+                        <a   href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}{{ evento.get_absolute_url }}&text=Invitación a la reunión de sexto básico este miércoles 12 a las 18:00 hrs." target="_blank" data-bs-toggle="tooltip" data-bs-title="Compartir en X">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                            <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                          </svg>
+                        </a>
+
+                        
+                        
+                      </div>
                 </div>
             </div>   
             {% endfor %}
         </div>
+
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-primary btn-lg me-2" data-bs-toggle="modal" data-bs-target="#colorModal">Color de fondo</button>
+          <button type="button" class="btn btn-primary btn-lg me-2" data-bs-toggle="modal" data-bs-target="#nuevoEvento">Nuevo evento</button>
+      </div>
         <!--
                         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                             <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Más acerca de eventos</button>
@@ -137,36 +160,42 @@
 </div>
     
 
-    <section id="profesores" class="container-fluid  text-center py-4  mt-4">
-        <h1 class=" display-5 fw-bold">Profesores</h1>
+    <section id="profesores" class="container-fluid  text-center py-4  bg-light">
+        <h1 class=" display-5 fw-bold pt-4">Profesores</h1>
 
-        <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#colorModal">Ver todos</button>
-            <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#nuevoEvento">Agregar profesor</button>
-        </div>
         <div class="row row-cols-1 row-cols-md-3 g-4 px-4  ">
             <!--columna 1-->
-            <div id="super" class="col  ">
+            <div id="super" class="col-md-3  ">
                 <!--card height 75% del div padre, sin borde-->
-                <div id="carta" class=" card h-100 border-0">
-                    <div id="imagen-carta" class="h-100 card-img-top bg-danger">
+                <div id="carta" class=" card h-100 border-0 rounded-4">
+                    <div id="imagen-carta" class="h-100 card-img-top rounded-top-4">
                         <img class="h-200 w-100"  src="{% static 'images/teacher1.png' %}"/>
                     </div>
-                    <div  class="h-50 card-body my-4">
-                    <h3 id="titulo" class="card-title">Card title</h3>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div  class="h-40 card-body my-4">
+                      <h3 id="titulo" class="card-title">Tomás Salgado</h3>
+                      <p class="card-text">Ingeniero Informático.</p>
+
+                      <a href="#" class="text-decoration-none">
+                        Enviar correo 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                          <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"></path>
+                          <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"></path>
+                        </svg>
+                      </a>
                     </div>  
                 </div>
                 <!--end card-->
-            </div>
-
-
-          
+              </div>
+             
         </div>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-dark btn-lg me-2" data-bs-toggle="modal" data-bs-target="#colorModal2">Color</button>
+          <button type="button" class="btn btn-outline-dark btn-lg me-2" data-bs-toggle="modal" data-bs-target="#nuevoEvento">Agregar profesor</button>
+      </div>
     </section>
 
 
-    <!-- Modal Comunicados -->
+    <!-- Modal para cambio color de fondo seccion Comunicados del home -->
     <div class="modal fade" id="colorModal" tabindex="-1" role="dialog" aria-labelledby="colorModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -190,6 +219,32 @@
         </div>
         </div>
     </div>
+
+
+    <!-- Modal para cambio color de fondo seccion profesores del home -->
+    <div class="modal fade" id="colorModal2" tabindex="-1" role="dialog" aria-labelledby="colorModalLabel2" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="colorModalLabel2">Seleccionar color de fondo profesores</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+          <div class="form-group">
+              <label for="colorPicker">Color:</label>
+              <input type="color" class="form-control" id="colorPicker">
+          </div>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="applyColorBtn2">Aplicar color</button>
+
+          </div>
+      </div>
+      </div>
+  </div>
 
 
     <!-- Modal -->
@@ -267,8 +322,6 @@
 
 
     
-    
-
 
     <script src="{% static 'js/comunicados.js' %}"></script>
     <script src="{% static 'js/evento.js' %}"></script>
