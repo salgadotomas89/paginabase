@@ -40,6 +40,18 @@ def obtener_usuarios_disponibles(request):
         }
         return JsonResponse(data)
 
+def registro_profesor(request):
+    if request.method == 'POST':
+        form = CustomUserForm(request.POST)
+        if form.is_valid():
+            # Guardar los datos del formulario
+            form.save()
+            # Puedes devolver una respuesta JSON con un mensaje de éxito
+            return JsonResponse({"message": "Profesor guardado con éxito"})
+        else:
+            # Si el formulario no es válido, devuelve un error
+            return JsonResponse({"error": form.errors}, status=400)
+    return JsonResponse({"error": "Solicitud no válida"}, status=400)
 
 def usuarios(request):
     usuarios = User.objects.all()
@@ -405,6 +417,7 @@ def inicio(request):
     comunicados = Comunicado.objects.all().order_by('-fecha')[:5]
     eventos = Evento.objects.all().order_by('-fecha')[:4]
     noticias = Noticia.objects.all()
+    form = CustomUserForm()  # Crear una instancia del formulario
 
     try:
         seccion_comunicado = Comunicados.objects.get()
@@ -416,6 +429,7 @@ def inicio(request):
                'comunicados': comunicados,
                'noticias': noticias,
                'eventos': eventos,
+               'form_usuario' : form,
                }
     
     return render(request, 'home.html', context)
@@ -437,6 +451,8 @@ def registro(request):
     else:
         user_form = CustomUserForm()
     return render(request, 'registration/form.html', {'form': user_form})
+
+
 
 
 #funcion de salir usuarios

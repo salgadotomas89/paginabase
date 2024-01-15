@@ -8,6 +8,7 @@
 
     <h1 class="display-5 fw-bold lh-1 mb-3 py-4">Registro</h1>
 
+
     <form class="form-signin" method="post" action="{% url 'registro' %}">
         {% csrf_token %}
         {{ form | crispy }}

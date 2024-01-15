@@ -26,7 +26,13 @@ class CustomUserForm(UserCreationForm):
         ('director', 'Director')
     ]
 
-    role = forms.ChoiceField(choices=ROLES_CHOICES, required=False)
+    username = forms.CharField(label='Nombre de usuario')
+    first_name = forms.CharField(label='Nombre')
+    email = forms.EmailField(label='Correo electrónico')
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirmación de contraseña', widget=forms.PasswordInput)
+    role = forms.ChoiceField(choices=ROLES_CHOICES, label='Rol', required=False)
+
 
     class Meta:
         model = User

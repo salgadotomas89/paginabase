@@ -3,6 +3,7 @@
 {% block body %}
 
 {% load static %} 
+{% load crispy_forms_tags %}
 
 <style>
   
@@ -189,8 +190,10 @@
              
         </div>
         <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-dark btn-lg me-2" data-bs-toggle="modal" data-bs-target="#modalRegistroProfesor">Ver todos</button>
+
           <button type="button" class="btn btn-outline-dark btn-lg me-2" data-bs-toggle="modal" data-bs-target="#colorModal2">Color</button>
-          <button type="button" class="btn btn-outline-dark btn-lg me-2" data-bs-toggle="modal" data-bs-target="#nuevoEvento">Agregar profesor</button>
+          <button type="button" class="btn btn-outline-dark btn-lg me-2" data-bs-toggle="modal" data-bs-target="#modalRegistroProfesor">Agregar profesor</button>
       </div>
     </section>
 
@@ -247,7 +250,7 @@
   </div>
 
 
-    <!-- Modal -->
+    <!-- Modal nuevo comunicado-->
   <div class="modal fade" id="nuevoComunicado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -280,6 +283,27 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal para ingresar profesor -->
+<div class="modal fade" id="modalRegistroProfesor" tabindex="-1" aria-labelledby="modalRegistroLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalRegistroLabel">Registro de Usuario</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Aquí irá el formulario -->
+              <form method="post" id="profesorForm">
+                  {% csrf_token %}
+                  <!--form_usuario viene del views-->
+                  {{ form_usuario | crispy }}
+                  <button class="btn btn-primary" type="submit" name="submit">Guardar</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
 
   <!--modaal evento-->
 
@@ -322,7 +346,7 @@
 
 
     
-
+    <script src="{% static 'js/home/profesores.js'%}">
     <script src="{% static 'js/comunicados.js' %}"></script>
     <script src="{% static 'js/evento.js' %}"></script>
     <script src="{% static 'js/desplazamiento.js' %}"></script>
