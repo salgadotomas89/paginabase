@@ -1,0 +1,180 @@
+{% extends "layout_updated.html" %}
+
+{% load static %}
+{% block body %}
+
+{% if mensaje_error %}
+<div class="alert alert-danger" role="alert">
+  {{ mensaje_error }}
+</div>
+{% endif %}
+
+{% if mensaje_exito %}
+<div class="alert alert-success" role="alert">
+    {{mensaje_exito}}
+</div>
+{% endif %}
+
+    <div class="container text-left">
+        <div class="p-4 mb-4 mt-4 bg-white rounded-3">
+            <div class="container-fluid py-5">
+                <div class="p-4 mb-4 bg-light rounded-3">
+                    <div class="container-fluid py-5">
+                      <h1 class="display-5 fw-bold">Bienvenidos a la Biblioteca</h1>
+                      <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+                      <a  class="btn btn-primary btn-lg" type="button">Ver libros <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+                      </svg></a>
+
+                      <a  class="btn btn-warning btn-lg" type="button">Ver prestamos 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">
+                            <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1"/>
+                          </svg>
+
+                      </a>
+
+                      <a  class="btn btn-warning btn-lg" type="button">Ver prestamos 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">
+                            <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1"/>
+                          </svg>
+
+                      </a>
+
+                     
+                      <a href="#" class="btn btn-success btn-lg" type="button" onclick="abrirModal()">Reservar computador 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pc-display-horizontal" viewBox="0 0 16 16">
+                            <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5M12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0M1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25"/>
+                        </svg>
+                    </a>
+
+                    </div>
+                  </div>
+              
+                  <div class="row align-items-md-stretch">
+                    <div class="col-md-6">
+                      <div class="h-100 p-5 text-white bg-primary rounded-3">
+                        <h2>Espacio de relajo</h2>
+                        <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="h-100 p-5 bg-body-tertiary border border-success rounded-3">
+                        <h2>Ranking de Lectores <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trophy" viewBox="0 0 16 16">
+                            <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5q0 .807-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33 33 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935m10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935M3.504 1q.01.775.056 1.469c.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.5.5 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667q.045-.694.056-1.469z"/>
+                          </svg></h2>
+                        <p> Nuestro colegio siempre ha querido fomentar la lectura es por esto
+                            que tenemos una estadística que informa  el curso, alumno, y profesor más lector del mes.</p>
+                        <button class="btn btn-success" type="button">Ver</button>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="p-5 mt-4 bg-light rounded-3">
+                    <div class="container-fluid py-5">
+                        
+                        <!-- División en dos partes -->
+                        <div class="row">
+                            <div class="col-md-8 ">
+                                <h1 class="display-5 fw-bold">Juegos didácticos</h1>
+                                <p class="fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+                            </div>
+                            <div class="col-md-4 ">
+                                <img src="{% static 'images/ajedrez.png' %}" class="img-fluid" alt="Imagen de juegos didácticos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+
+
+                  <div class="row mt-4 align-items-md-stretch">
+                    <div class="col-md-4">
+                      <div class="h-100 p-5 text-white bg-primary rounded-3">
+                        <h2>Diario mural</h2>
+                        <p>En este lugar se encuentran fotos famosas en la historia, libro destacado del mes, el lector del mes, poesias de alumnos, etc.</p>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="h-100 p-5 bg-body-tertiary border border-success rounded-3">
+                        <h2>Boletin Altas Cumbres <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trophy" viewBox="0 0 16 16">
+                            <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5q0 .807-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33 33 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935m10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935M3.504 1q.01.775.056 1.469c.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.5.5 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667q.045-.694.056-1.469z"/>
+                          </svg></h2>
+                        <p> Nuestro colegio siempre ha querido fomentar la lectura es por esto
+                            que tenemos una estadística que informa  el curso, alumno, y profesor más lector del mes.</p>
+                        <a href="{% url 'boletines' %}" class="btn btn-success" type="button">Ver</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+            </div>
+        </div>
+    </div>
+
+
+    
+
+  </div>
+
+
+ 
+
+   <!-- Modal -->
+   <div id="modal" class="modal">
+    <div class="modal-dialog bg-primary">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reservar Computadora</h5>
+                <button type="button" class="btn-close" onclick="cerrarModal()"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario de reserva -->
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="bloque_reserva" id="bloque1" value="10:00 - 10:20">
+                        <label class="form-check-label" for="bloque1">10:00 - 10:20</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="bloque_reserva" id="bloque2" value="11:45 - 12:00" checked>
+                        <label class="form-check-label" for="bloque2">11:45 - 12:00</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="bloque_reserva" id="bloque3" value="13:30 - 14:00">
+                        <label class="form-check-label" for="bloque3">13:30 - 14:00</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="bloque_reserva" id="bloque4" value="14:00 - 14:30">
+                        <label class="form-check-label" for="bloque4">14:00 - 14:30</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Reservar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  <!-- Agregar los scripts necesarios para el datepicker -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+  <!-- JavaScript para abrir y cerrar el modal -->
+  <script>
+      function abrirModal() {
+          document.getElementById('modal').style.display = 'block';
+      }
+
+      function cerrarModal() {
+          document.getElementById('modal').style.display = 'none';
+      }
+
+      
+     
+  </script>
+{% endblock %}

@@ -21,4 +21,4 @@ class Images(models.Model):
     #clave foranea de una Noticia
     noticia = models.ForeignKey(Noticia,on_delete=models.CASCADE)
     #imagen que guardamos en la carpeta noticias
-    image = models.ImageField(upload_to='fotos',null=True,blank=True)
+    image = models.FileField(upload_to='fotos',null=True,blank=True)

@@ -6,6 +6,7 @@ from colegio.views import not_found
 urlpatterns = [
     path('', views.inicio, name='inicio'),
     path('configuracion', views.configuracion, name='configuracion'),
+    path('configuracion/calendario', views.calendario_configuracion, name='calendario_configuracion'),
 
     path('registro', views.registro, name='registro'),
     path('registro/profesor', views.registro_profesor, name='registro_profesor'),
@@ -42,7 +43,8 @@ urlpatterns = [
 
     path('dame_asignatura', views.dame_asignatura, name="dame_asignatura"),
 
-    path('calendario_evaluaciones', views.calendario_evaluaciones, name="calendario_evaluaciones"),
+    path('calendario', views.calendario, name="calendario"),
+
 
     path('apariencia', views.apariencia, name="apariencia"),
 
@@ -53,6 +55,8 @@ urlpatterns = [
     path('actualizar-direccion/', views.actualizar_direccion_colegio, name='actualizar_direccion_colegio'),
     path('actualizar-telefono/', views.actualizar_telefono_colegio, name='actualizar_telefono_colegio'),
     path('actualizar-horario/', views.actualizar_horario_colegio, name='actualizar_horario_colegio'),
+
+
 ]
 
 handler404 = not_found

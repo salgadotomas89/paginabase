@@ -9,7 +9,6 @@ from colegio.models import Curso
 
 from django.http import HttpResponse
 from django.template.loader import get_template
-from xhtml2pdf import pisa
 from io import BytesIO
 
 def generar_pdf(request, curso_id, month):

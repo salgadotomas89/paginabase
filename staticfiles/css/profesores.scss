@@ -1,0 +1,48 @@
+/*estilos cartas de noticias*/
+#carta {
+	background-color: #FCF3CF;
+
+	#titulo {
+		display: inline-block;
+		position: relative;
+	}
+	
+	#titulo:after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		transform: scaleX(0);
+		height: 2px;
+		bottom: 0;
+		left: 0;
+		background-color: black;
+		transform-origin: bottom right;
+		transition: transform 0.25s ease-out;
+	}
+	/*propiedades de la imagen en el card*/
+	#imagen-carta {
+		overflow: hidden;
+		img {
+
+			transition: all .3s ease;
+
+		}
+	}
+	/*cuando estoy sobre cualquier espacio del card*/
+	&:hover {
+		/*cambiamos el color a blanco*/
+		background-color: white;
+		/*cambiamos el tamaño de la foto*/
+		img{
+			transform: scale(1.2);
+		}
+		/*subrayamos el titulo*/
+		#titulo:after {
+			transform: scaleX(1);
+			transform-origin: bottom left;
+		}
+		
+	}
+}
+
+

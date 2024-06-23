@@ -10,6 +10,7 @@ urlpatterns = [
     path('calendario/', include("calendario.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
     path('comunicados/', include('comunicados.urls')),
+    path('biblioteca/', include("biblioteca.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -6,10 +6,10 @@ from datetime import datetime
 from django.template.loader import render_to_string
 from django.db.models import Q
 # Desde cualquier archivo dentro de tus apps
-from colegio.models import AppearanceSettings, Asignatura, Colegio, Curso, CursoAsignatura, Evento, UserProfile
+from colegio.models import AppearanceSettings, Asignatura, Colegio, Curso, CursoAsignatura, Evento, Menu, MenuItem, UserProfile
 from comunicados.models import Comunicado, Comunicados
 from noticias.models import Images, Noticia
-from .forms import AppearanceSettingsForm, CustomUserForm, FormEvento
+from .forms import AppearanceSettingsForm, CustomUserForm, FormEvento, MenuForm, MenuItemForm
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
@@ -221,13 +221,24 @@ def asignar_asignaturas(request):
     else:
         return JsonResponse({'success': False, 'error': 'Método de solicitud no válido'})
 
-def calendario_evaluaciones(request):
+
+def calendario_configuracion(request):
     cursos = Curso.objects.all()
     print(cursos)
     context = {
         "cursos": cursos,
     }
     return render(request, 'calendario_evaluaciones.html', context)
+
+
+
+def calendario(request):
+    cursos = Curso.objects.all()
+    print(cursos)
+    context = {
+        "cursos": cursos,
+    }
+    return render(request, 'calendario_evaluaciones_2.html', context)
 
 
 def eliminar_asignatura(request):
@@ -432,7 +443,7 @@ def inicio(request):
                'form_usuario' : form,
                }
     
-    return render(request, 'home.html', context)
+    return render(request, 'inicio/home.html', context)
 
 
 
@@ -517,10 +528,14 @@ def apariencia(request):
         'form': form
     }
 
-    return render(request, 'apariencia.html', context)
+    return render(request, 'config/apariencia.html', context)
 
 def menu(request):
-    return render(request, 'menu.html')
+    items = MenuItem.objects.all()
+    menu = Menu.objects.first()
+    form = MenuItemForm()
+
+    return render(request, 'config/menu.html', {'menu' : menu, 'form' : form})
 
 def configuracion(request):
     apariencia = AppearanceSettings.objects.first()
@@ -545,4 +560,5 @@ def configuracion(request):
         'form': form
     }
 
-    return render(request, 'configuracion.html', context)
+    return render(request, 'config/configuracion.html', context)
+

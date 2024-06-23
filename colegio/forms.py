@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from colegio.models import AppearanceSettings, Colegio, Evento
+from colegio.models import AppearanceSettings, Colegio, Evento, Menu, MenuItem
 
 
 class AppearanceSettingsForm(forms.ModelForm):
@@ -48,3 +48,16 @@ class FormColegio(forms.ModelForm):
     class Meta:
         model = Colegio
         fields = '__all__'
+
+class MenuItemForm(forms.ModelForm):
+    class Meta:
+        model = MenuItem
+        fields = ['name', 'url']
+
+class MenuForm(forms.ModelForm):
+    class Meta:
+        model = Menu
+        fields = ['menu_items']
+        widgets = {
+            'menu_items': forms.CheckboxSelectMultiple,
+        }

@@ -25,6 +25,16 @@
         <div class="p-2 mb-4   rounded-3">
             <div class="container-fluid py-5">
                 <h1>Comunicados oficiales</h1>
+
+                <div>
+                    <a href="#"><span class="badge rounded-pill text-bg-primary">Información</span></a>
+                    <span class="badge rounded-pill text-bg-secondary">Secondary</span>
+                    <span class="badge rounded-pill text-bg-success">Success</span>
+                    <span class="badge rounded-pill text-bg-danger">Urgente</span>
+                    <span class="badge rounded-pill text-bg-warning">Warning</span>
+                    
+                </div>
+
                 {% for comunicado in comunicados%}
                     <div id="yeye"  class="my-3 p-3  rounded shadow-sm">
                         <h6 class="border-bottom pb-2 mb-0 negrita">{{comunicado.titulo}}</h6>

@@ -1,36 +1,43 @@
-@charset "UTF-8";
-/*estilos cartas de noticias*/
 #carta {
-  background-color: #FCF3CF;
-  /*propiedades de la imagen en el card*/
-  /*cuando estoy sobre cualquier espacio del card*/ }
-  #carta #titulo {
-    display: inline-block;
-    position: relative; }
-  #carta #titulo:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: black;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out; }
-  #carta #imagen-carta {
-    overflow: hidden; }
-    #carta #imagen-carta img {
-      transition: all .3s ease; }
-  #carta:hover {
-    /*cambiamos el color a blanco*/
-    background-color: white;
-    /*cambiamos el tamaño de la foto*/
-    /*subrayamos el titulo*/ }
-    #carta:hover img {
-      transform: scale(1.2); }
-    #carta:hover #titulo:after {
-      transform: scaleX(1);
-      transform-origin: bottom left; }
+background-color: #d6d6d6;
+}
 
-/*# sourceMappingURL=profesores.css.map */
+#carta #titulo {
+display: inline-block;
+position: relative;
+}
+
+#carta #titulo:after {
+content: '';
+position: absolute;
+width: 100%;
+transform: scaleX(0);
+height: 2px;
+bottom: 0;
+left: 0;
+background-color: black;
+transform-origin: bottom right;
+transition: transform 0.25s ease-out;
+}
+
+#carta #imagen-carta {
+overflow: hidden;
+}
+
+#carta #imagen-carta img {
+transition: all .3s ease;
+}
+
+#carta:hover {
+background-color: white;
+}
+
+#carta:hover img {
+transform: scale(1.2);
+}
+
+#carta:hover #titulo:after {
+transform: scaleX(1);
+transform-origin: bottom left;
+}
+

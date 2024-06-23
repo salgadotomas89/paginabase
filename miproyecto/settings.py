@@ -31,11 +31,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'colegio',
     'sass_processor',
-    "crispy_forms",
-    "crispy_bootstrap5",
     'noticias',
+    'crispy_forms',
+
     'calendario',
     'comunicados',
+    'biblioteca'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -128,6 +129,8 @@ STATIC_URL = '/static/'
 # Add these new lines
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'biblioteca/static'),
+
 )
 
 

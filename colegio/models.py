@@ -75,3 +75,16 @@ class Colegio(models.Model):
     logo = models.ImageField(upload_to='fotos', blank=True, null=True)
     horario = models.CharField(max_length=100, null=True, blank=True)
     telefono = models.CharField(max_length=100, null=True, blank=True)
+
+class MenuItem(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class Menu(models.Model):
+    menu_items = models.ManyToManyField(MenuItem)
+
+    def __str__(self):
+        return self.school_name

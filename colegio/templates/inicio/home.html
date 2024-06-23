@@ -1,0 +1,379 @@
+{% extends "inicio/layout_updated.html" %}
+
+{% block body %}
+
+{% load static %} 
+ 
+  
+<section id="noticias" class="container-fluid text-center py-4 mt-4 ">
+  <div id="myCarousel" class="carousel slide " data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for noticia in noticias %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="container h-100">
+          <div class="row align-items-center justify-content-center  g-4 h-100">
+            <div class="col-md-6 text-center text-md-start">
+              <div class="d-flex flex-column mx-lg-5 py-4 px-5 ">
+                <h2 class="display-6 fw-bold lh-1 mb-3">{{ noticia.titulo }}</h2>
+                <p class="lead">Diseña y personaliza rápidamente sitios utilizando preconstruidos y potentes complementos de JavaScript.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                  <a href="{% url 'noticias' id=noticia.id %}" class="btn btn-primary btn-lg px-4">Leer más..</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+              {% if noticia.images_set.first %}
+              <img src="{{ noticia.images_set.first.image.url }}" class="d-block" style="width: 700px; height: 500px;" alt="{{ noticia.titulo }}">
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+      </svg></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+      </svg></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
+
+    <div class="py-5 bg-warning text-center  " id="sombra-abajo">
+      <h1 class="display-4 fw-bold pulsate">
+             Calendario de evaluaciones
+      </h1>
+      <p class="lead mb-4">Queridos apoderados les informamos que toda información sobre las proximas
+         evaluaciones la encontrarán aquí</p>
+
+
+         <p class="lead mb-4">Queridos apoderados les informamos que toda información sobre las proximas
+          evaluaciones la encontrarán aquí</p>
+          <p class="lead mb-4">Queridos apoderados les informamos que toda información sobre las proximas
+            evaluaciones la encontrarán aquí</p>
+      <a href="{% url 'calendario' %}"  type="button" class="btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold position-relative">
+        Ver calendario
+      </a>
+    </div>
+
+
+
+
+<!--color section se encuentra dentro de common_styles.html y es para manejar el cambio de color de fondo-->
+<div class="color-section container-fluid  h-50  text-start py-5"  >
+  <div class="container-fluid col-xxl-12 ">
+    <div class="row flex-lg-row align-items-center ">
+            <div class="col-10 col-sm-8 col-lg-6 py-4  d-flex justify-content-center ">
+                <img src="{% static 'images/cm1.png' %}" class=" img-fluid" alt="Bootstrap Themes" width="400" height="400" >
+            </div>
+            
+            <div class="col-lg-6">
+              <h1 class="display-4 fw-bold mb-4">Comunicados <br>Información oficialpara nuestra comunidad.</h1>
+              <p class="lead mb-4">
+                Explore los comunicados más recientes del colegio, 
+                abarcando temas esenciales en diversas áreas académicas y 
+                administrativas. Manténgase informado con las últimas actualizaciones y anuncios importantes.</p>
+              <a href="{% url 'comunicados' %}" class="btn btn-primary btn-lg">Ver todos</a>
+              <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#nuevoComunicado">Nuevo comunicado</button>
+              <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#colorModal"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-paint-bucket" viewBox="0 0 16 16">
+                <path d="M6.192 2.78c-.458-.677-.927-1.248-1.35-1.643a3 3 0 0 0-.71-.515c-.217-.104-.56-.205-.882-.02-.367.213-.427.63-.43.896-.003.304.064.664.173 1.044.196.687.556 1.528 1.035 2.402L.752 8.22c-.277.277-.269.656-.218.918.055.283.187.593.36.903.348.627.92 1.361 1.626 2.068.707.707 1.441 1.278 2.068 1.626.31.173.62.305.903.36.262.05.64.059.918-.218l5.615-5.615c.118.257.092.512.05.939-.03.292-.068.665-.073 1.176v.123h.003a1 1 0 0 0 1.993 0H14v-.057a1 1 0 0 0-.004-.117c-.055-1.25-.7-2.738-1.86-3.494a4 4 0 0 0-.211-.434c-.349-.626-.92-1.36-1.627-2.067S8.857 3.052 8.23 2.704c-.31-.172-.62-.304-.903-.36-.262-.05-.64-.058-.918.219zM4.16 1.867c.381.356.844.922 1.311 1.632l-.704.705c-.382-.727-.66-1.402-.813-1.938a3.3 3.3 0 0 1-.131-.673q.137.09.337.274m.394 3.965c.54.852 1.107 1.567 1.607 2.033a.5.5 0 1 0 .682-.732c-.453-.422-1.017-1.136-1.564-2.027l1.088-1.088q.081.181.183.365c.349.627.92 1.361 1.627 2.068.706.707 1.44 1.278 2.068 1.626q.183.103.365.183l-4.861 4.862-.068-.01c-.137-.027-.342-.104-.608-.252-.524-.292-1.186-.8-1.846-1.46s-1.168-1.32-1.46-1.846c-.147-.265-.225-.47-.251-.607l-.01-.068zm2.87-1.935a2.4 2.4 0 0 1-.241-.561c.135.033.324.11.562.241.524.292 1.186.8 1.846 1.46.45.45.83.901 1.118 1.31a3.5 3.5 0 0 0-1.066.091 11 11 0 0 1-.76-.694c-.66-.66-1.167-1.322-1.458-1.847z"/>
+              </svg></button>
+              <button type="button" class="btn btn-primary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#colorModal">Cambiar imagen</button>
+
+            </div>           
+    </div>
+  </div>
+</div>
+
+
+<div class="py-5 bg-white text-center  " id="sombra-arriba">
+  <h1 class="display-4 fw-bold pulsate">
+      
+         Notas
+  </h1>
+
+  <p class="px-5">Queridos apoderados les informamos que toda información oficial la encontrarán en el siguiente link
+          </p>
+  <a  type="button" class="btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold position-relative">
+      Ver todos         
+  </a>
+</div>
+
+
+
+
+<div class="bg-dark py-5 text-center " >
+  <div class="container-fluid py-5">
+    <h1 class="display-5 fw-bold text-white mb-4">Eventos Próximos</h1>
+    <!--<p class="fs-5 mb-4">Responsive grid system and powerful JavaScript plugins.</p>-->
+
+    <div class="row" data-masonry='{"percentPosition": true }'>
+        <!-- Logo Carousel animation -->
+        <div x-data="{}" x-init="$nextTick(() => {
+                let ul = $refs.logos;
+                ul.insertAdjacentHTML('afterend', ul.outerHTML);
+                ul.nextSibling.setAttribute('aria-hidden', 'true');
+            })" class="tw-w-full tw-inline-flex tw-flex-nowrap tw-overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+            <ul x-ref="logos" class="tw-flex tw-items-center tw-justify-center md:tw-justify-start [&_li]:tw-mx-8 [&_img]:tw-max-w-none tw-animate-infinite-scroll">
+                {% for evento in eventos %}
+                <li>
+                    <div class="card text-dark bg-light mb-3 border-0 rounded-4" style="width: 18rem;">
+                        <div class="card-header">
+                            Fecha : {{ evento.fecha }}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="fw-bold card-title">{{ evento.titulo }}</h5>
+                            <p class="card-text">{{ evento.texto }}</p>
+
+                            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ evento.titulo }} ({{ evento.fecha }}): {{ evento.texto }}." target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                                    <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- End: Logo Carousel animation -->
+    </div>
+</div>
+</div>
+    
+
+    <section id="profesores" class="container-fluid  text-center py-4  bg-light">
+        <h1 class=" display-5 fw-bold pt-4">Profesores</h1>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4 px-4  ">
+            <!--columna 1-->
+            <div id="super" class="col-md-3  ">
+                <!--card height 75% del div padre, sin borde-->
+                <div id="carta" class=" card h-100 border-0 rounded-4">
+                    <div id="imagen-carta" class="h-100 card-img-top rounded-top-4">
+                        <img class="h-200 w-100"  src="{% static 'images/teacher1.png' %}"/>
+                    </div>
+                    <div  class="h-40 card-body my-4">
+                      <h3 id="titulo" class="card-title">Tomás Salgado</h3>
+                      <p class="card-text">Ingeniero Informático.</p>
+
+                      <a href="#" class="text-decoration-none">
+                        Enviar correo 
+                       
+                      </a>
+                    </div>  
+                </div>
+                <!--end card-->
+              </div>
+             
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-dark btn-lg me-2" data-bs-toggle="modal" data-bs-target="#modalRegistroProfesor">Ver todos</button>
+
+          <button type="button" class="btn btn-outline-dark btn-lg me-2" data-bs-toggle="modal" data-bs-target="#colorModal2">Color</button>
+          <button type="button" class="btn btn-outline-dark btn-lg me-2" data-bs-toggle="modal" data-bs-target="#modalRegistroProfesor">Agregar profesor</button>
+      </div>
+    </section>
+
+    <section class="py-5 bg-white text-center  " id="sombra-arriba">
+      <h1 class="display-4 fw-bold pulsate">
+          
+             Biblioteca
+      </h1>
+    
+      <p class="px-5">Queridos apoderados les informamos que toda información oficial la encontrarán en el siguiente link
+              </p>
+      <a href="{% url 'biblioteca' %}" type="button" class="btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold position-relative">
+          ir a la Biblioteca        
+      </a>
+    </section>
+    
+
+
+    <!-- Modal para cambio color de fondo seccion Comunicados del home -->
+    <div class="modal fade" id="colorModal" tabindex="-1" role="dialog" aria-labelledby="colorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="colorModalLabel">Seleccionar color de fondo</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <div class="form-group">
+                <label for="colorPicker">Color:</label>
+                <input type="color" class="form-control" id="colorPicker">
+            </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="applyColorBtn">Aplicar color</button>
+
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+    <!-- Modal para cambio color de fondo seccion profesores del home -->
+    <div class="modal fade" id="colorModal2" tabindex="-1" role="dialog" aria-labelledby="colorModalLabel2" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="colorModalLabel2">Seleccionar color de fondo profesores</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+          <div class="form-group">
+              <label for="colorPicker">Color:</label>
+              <input type="color" class="form-control" id="colorPicker">
+          </div>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="applyColorBtn2">Aplicar color</button>
+
+          </div>
+      </div>
+      </div>
+  </div>
+
+
+    <!-- Modal nuevo comunicado-->
+  <div class="modal fade" id="nuevoComunicado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        
+        <div class="modal-body">
+            <form id="comunicadoForm" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form }}
+                <div class="form-group">
+                  <label for="inputAddress">Título</label>
+                  <input name="titulo" type="text" class="form-control" id="inputAddress" >
+                </div>
+
+                <div class="form-group">
+                  <label for="tiny">Escriba su comunicado</label>
+                  <textarea name="texto" class="form-control" id="tiny"rows="12" style="white-space: pre-wrap;"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="autor">Redactor</label>
+                    <input name="autor" type="text" class="form-control" id="autor" >
+                </div>
+                <div class="form-group pt-2">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para ingresar profesor -->
+<div class="modal fade" id="modalRegistroProfesor" tabindex="-1" aria-labelledby="modalRegistroLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalRegistroLabel">Registro de Usuario</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Aquí irá el formulario -->
+              <form method="post" id="profesorForm">
+                  {% csrf_token %}
+                  <!--form_usuario viene del views-->
+                  <button class="btn btn-primary" type="submit" name="submit">Guardar</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+  <!--modaal evento-->
+
+  <div class="modal fade" id="nuevoEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        
+        <div class="modal-body">
+            <form id="eventoForm" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form }}
+                <div class="form-group">
+                  <label for="inputAddress">Título</label>
+                  <input name="titulo" type="text" class="form-control" id="inputAddress" >
+                </div>
+
+                <div class="form-group">
+                  <label for="tiny">Escribir texto</label>
+                  <textarea name="texto" class="form-control" id="tiny"rows="12" style="white-space: pre-wrap;"></textarea>
+                </div>
+
+                
+
+                <div class="form-group">
+                    <label for="date">Fecha del evento</label>
+                    <input name="fecha" type="text" class="fecha-ts form-control">
+                 </div>
+
+               
+                <div class="form-group pt-2">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+ 
+    
+    <script src="{% static 'js/home/profesores.js' %}"></script>
+    <script src="{% static 'js/comunicados.js' %}"></script>
+    <script src="{% static 'js/evento.js' %}"></script>
+    <script src="{% static 'js/desplazamiento.js' %}"></script>
+    <script src="{% static 'js/datepicker.js' %}"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+          prefix: 'tw-',
+  
+            theme: {
+                extend: {
+                    
+                    animation: {
+                        'infinite-scroll': 'infinite-scroll 25s linear infinite',
+                    },
+                    keyframes: {
+                        'infinite-scroll': {
+                            from: { transform: 'translateX(0)' },
+                            to: { transform: 'translateX(-100%)' },
+                        }
+                    }                    
+                },
+            },
+        };
+    </script>
+    
+
+{% endblock %}

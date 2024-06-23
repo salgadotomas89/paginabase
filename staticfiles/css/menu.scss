@@ -1,0 +1,133 @@
+$color_1: black;
+$color_2: #3B71CA;
+$background-color_1: white;
+$background-color_2: rgb(240, 240, 240);
+
+/*al nav le doy color blanco y letras negras*/
+/* Styles for screens smaller than 768px */
+/* Styles for screens between 768px and 992px */
+/*oculto el texto que aparece a la izquierda en el menu*/
+
+nav {
+
+	background-color: $background-color_1;
+	color: $color_1;
+	
+	.navbar-brand,
+	.nav-link {
+		color: $color_1 ;
+		&:hover {
+			color: $color_2;
+		}
+	}
+
+	.nav-item {
+		background-color: #3B71CA;
+		margin-right: 60px ;  // Ajusta el valor según necesites
+
+		&:last-child {
+			margin-right: 0;  // Esto es para asegurarse de que el último elemento no tenga margen extra a la derecha
+		}
+	}
+}
+
+
+
+
+
+.navbar-nav {
+
+
+	.nav-link.active {
+		color: $color_1;
+		box-shadow: none;
+	}
+	.nav-link.show {
+		color: $color_1;
+		box-shadow: none;
+	}
+	
+	
+}
+
+
+
+
+.navbar {
+	.has-megamenu {
+		position: static !important;
+		border: 0;
+		outline: 0;
+	}
+	.megamenu {
+		position: relative; // Asegúrate de que tenga una posición relativa, absoluta, fija o pegajosa para que z-index funcione
+		z-index: 20; 
+		padding: 50px;
+		border: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		border-radius: 0px;
+		margin-top: 0;
+		-webkit-box-shadow: 0 4px 6px -6px #222;
+		-moz-box-shadow: 0 4px 6px -6px #222;
+		box-shadow: 0 4px 6px -6px #222;
+	}
+}
+#contenedor {
+	display: flex;
+	justify-content: center;
+}
+.col-megamenu {
+	li {
+		a {
+			&:hover {
+				color: $color_2;
+			}
+		}
+
+		
+	}
+}
+@media (max-width: 767px) {
+	#texto {
+		display: none;
+	}
+	#contenedor {
+		display: flex;
+		justify-content: left;
+		padding: 5px;
+	}
+	#padre {
+		padding: 3px;
+	}
+	.col-megamenu {
+		li {
+			&:hover {
+				background-color: $background-color_2;
+			}
+		}
+	}
+	#miDiv {
+		width: 100%;
+	}
+}
+@media (min-width: 768px) and (max-width: 992px) {
+	#texto {
+		display: none;
+	}
+	#contenedor {
+		display: flex;
+		justify-content: center;
+	}
+	#miDiv {
+		flex: 1;
+		margin: 0;
+		padding: 0;
+	}
+	#miDiv2 {
+		flex: 1;
+		margin: 0;
+		padding: 0;
+	}
+}
